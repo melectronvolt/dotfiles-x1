@@ -77,11 +77,11 @@
         "format-connected": "\uf293  {num_connections}",
         "format-disabled":  "\uf294",
         "format-off":       "\uf294",
-        "tooltip-format":           "Bluetooth actif",
-        "tooltip-format-connected": "{num_connections} appareil(s)\n{device_enumerate}",
+        "tooltip-format":           "Bluetooth on",
+        "tooltip-format-connected": "{num_connections} device(s)\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "tooltip-format-disabled":  "Bluetooth desactive",
-        "tooltip-format-off":       "Bluetooth eteint",
+        "tooltip-format-disabled":  "Bluetooth disabled",
+        "tooltip-format-off":       "Bluetooth off",
         "on-click": "blueman-manager"
     },
 
@@ -92,22 +92,22 @@
         "format-icons":        ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
         "tooltip-format-wifi":         "{essid}\n{ifname}  \u00b7  {ipaddr}",
         "tooltip-format-ethernet":     "{ifname}\n{ipaddr}",
-        "tooltip-format-disconnected": "Deconnecte",
+        "tooltip-format-disconnected": "Disconnected",
         "on-click":            "nm-connection-editor"
     },
 
     "custom/vpn": {
-        "exec": "~/.local/bin/vpn-status",
+        "exec": "/home/remi/.local/bin/vpn-status",
         "interval": 3,
         "return-type": "json",
-        "on-click": "~/.local/bin/vpn-toggle",
+        "on-click": "/home/remi/.local/bin/vpn-toggle",
         "tooltip": true
     },
 
     "custom/power": {
-        "format": "⏻",
-        "tooltip": "Menu power",
-        "on-click": "~/.local/bin/power-menu"
+        "format": "\u23fb",
+        "tooltip": "Power menu",
+        "on-click": "/home/remi/.local/bin/power-menu"
     },
 
     "tray": {

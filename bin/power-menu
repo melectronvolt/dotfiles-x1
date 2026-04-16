@@ -1,18 +1,16 @@
 #!/bin/bash
-# Menu power via wofi
-
-options="  Verrouiller
-  Veille
-󰗽  Deconnexion
-  Redemarrer
-  Eteindre"
+options="  Lock
+  Suspend
+󰗽  Logout
+  Reboot
+  Shutdown"
 
 choice=$(echo -e "$options" | wofi --dmenu --prompt "Power" --width 300 --height 280 --cache-file /dev/null)
 
 case "$choice" in
-    *Verrouiller*)  ~/.local/bin/sway-lock ;;
-    *Veille*)       ~/.local/bin/sway-lock & systemctl suspend ;;
-    *Deconnexion*)  swaymsg exit ;;
-    *Redemarrer*)   systemctl reboot ;;
-    *Eteindre*)     systemctl poweroff ;;
+    *Lock*)      ~/.local/bin/sway-lock ;;
+    *Suspend*)   ~/.local/bin/sway-lock & systemctl suspend ;;
+    *Logout*)    swaymsg exit ;;
+    *Reboot*)    systemctl reboot ;;
+    *Shutdown*)  systemctl poweroff ;;
 esac

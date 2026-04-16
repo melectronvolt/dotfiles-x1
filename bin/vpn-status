@@ -3,12 +3,12 @@ VPN_NAME="Fedora-CH-247"
 SHIELD="\uf132"
 
 if ! nmcli -t -f NAME connection show 2>/dev/null | grep -q "^${VPN_NAME}$"; then
-    printf '{"text":"%b","class":"absent","tooltip":"VPN %s absent"}\n' "$SHIELD" "$VPN_NAME"
+    printf '{"text":"%b","class":"absent","tooltip":"VPN %s not configured"}\n' "$SHIELD" "$VPN_NAME"
     exit 0
 fi
 
 if nmcli -t -f NAME connection show --active 2>/dev/null | grep -q "^${VPN_NAME}$"; then
-    printf '{"text":"%b","class":"connected","tooltip":"VPN %s connecte (clic pour deconnecter)"}\n' "$SHIELD" "$VPN_NAME"
+    printf '{"text":"%b","class":"connected","tooltip":"VPN %s connected (click to disconnect)"}\n' "$SHIELD" "$VPN_NAME"
 else
-    printf '{"text":"%b","class":"disconnected","tooltip":"VPN %s deconnecte (clic pour connecter)"}\n' "$SHIELD" "$VPN_NAME"
+    printf '{"text":"%b","class":"disconnected","tooltip":"VPN %s disconnected (click to connect)"}\n' "$SHIELD" "$VPN_NAME"
 fi
