@@ -1,0 +1,1 @@
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ACTION=="change", RUN+="/usr/bin/systemctl --no-block start auto-power-profile.service"

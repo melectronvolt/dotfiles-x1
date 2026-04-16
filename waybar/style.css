@@ -1,0 +1,123 @@
+/* ~/.config/waybar/style.css -- Fond noir, accent paramétrable */
+
+/* === PALETTE (modifiée par switch-accent.sh) === */
+@define-color base      #1a1a1a;
+@define-color mantle    #0f0f0f;
+@define-color crust     #000000;
+@define-color text      #e4e4e4;
+@define-color subtext1  #a8a8a8;
+@define-color surface0  #2a2a2a;
+@define-color surface1  #3a3a3a;
+@define-color overlay0  #6a6a6a;
+@define-color accent    #f9e2af;
+@define-color red       #f38ba8;
+@define-color green     #a6e3a1;
+/* === END PALETTE === */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: alpha(@base, 0.92);
+    color: @text;
+    border-radius: 10px;
+    border: 1px solid alpha(@surface1, 0.6);
+}
+
+#workspaces {
+    background: @mantle;
+    border-radius: 8px;
+    margin: 5px 4px 5px 6px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    color: @overlay0;
+    border-radius: 6px;
+    margin: 3px 2px;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+#workspaces button:hover {
+    background: @surface1;
+    color: @text;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button.focused {
+    background: @accent;
+    color: @crust;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @crust;
+}
+
+#mode {
+    background: @accent;
+    color: @crust;
+    padding: 0 12px;
+    margin: 5px 2px;
+    border-radius: 6px;
+}
+
+#window {
+    padding: 0 12px;
+    margin: 5px 2px;
+    color: @subtext1;
+}
+
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#battery,
+#power-profiles-daemon,
+#tray {
+    padding: 0 12px;
+    margin: 5px 2px;
+    background: @mantle;
+    border-radius: 6px;
+}
+
+#clock       { color: @accent; font-weight: 600; }
+#cpu         { color: @accent; }
+#memory      { color: @accent; }
+#temperature { color: @accent; }
+#network     { color: @accent; }
+#pulseaudio  { color: @accent; }
+#battery     { color: @accent; }
+
+#temperature.critical {
+    background: @red;
+    color: @crust;
+}
+
+#pulseaudio.muted {
+    color: @overlay0;
+}
+
+#battery.warning  { color: @accent; }
+#battery.critical { background: @red; color: @crust; }
+
+#power-profiles-daemon.performance { color: @red; }
+#power-profiles-daemon.balanced    { color: @accent; }
+#power-profiles-daemon.power-saver { color: @green; }
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @red;
+    border-radius: 6px;
+}

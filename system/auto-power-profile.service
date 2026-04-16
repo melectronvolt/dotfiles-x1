@@ -1,0 +1,11 @@
+[Unit]
+Description=Switch tuned profile based on AC adapter state
+After=tuned.service
+Wants=tuned.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/auto-power-profile
+
+[Install]
+WantedBy=multi-user.target

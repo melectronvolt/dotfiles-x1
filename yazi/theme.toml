@@ -1,0 +1,106 @@
+# Yazi 26 theme -- Black + Yellow accent (#f9e2af)
+
+[mgr]
+cwd = { fg = "#f9e2af" }
+
+find_keyword   = { fg = "#f9e2af", bold = true, italic = true }
+find_position  = { fg = "#f38ba8", italic = true }
+symlink_target = { fg = "#a8a8a8" }
+
+marker_copied   = { fg = "#a6e3a1", bg = "#a6e3a1" }
+marker_cut      = { fg = "#f38ba8", bg = "#f38ba8" }
+marker_marked   = { fg = "#f9e2af", bg = "#f9e2af" }
+marker_selected = { fg = "#f9e2af", bg = "#f9e2af" }
+
+count_copied   = { fg = "#1a1a1a", bg = "#a6e3a1" }
+count_cut      = { fg = "#1a1a1a", bg = "#f38ba8" }
+count_selected = { fg = "#1a1a1a", bg = "#f9e2af" }
+
+border_symbol = "│"
+border_style  = { fg = "#3a3a3a" }
+
+[tabs]
+active   = { fg = "#1a1a1a", bg = "#f9e2af", bold = true }
+inactive = { fg = "#a8a8a8", bg = "#2a2a2a" }
+
+[mode]
+normal_main = { fg = "#1a1a1a", bg = "#f9e2af", bold = true }
+normal_alt  = { fg = "#f9e2af", bg = "#2a2a2a" }
+select_main = { fg = "#1a1a1a", bg = "#a6e3a1", bold = true }
+select_alt  = { fg = "#a6e3a1", bg = "#2a2a2a" }
+unset_main  = { fg = "#1a1a1a", bg = "#f38ba8", bold = true }
+unset_alt   = { fg = "#f38ba8", bg = "#2a2a2a" }
+
+[status]
+perm_type  = { fg = "#89b4fa" }
+perm_read  = { fg = "#a6e3a1" }
+perm_write = { fg = "#f9e2af" }
+perm_exec  = { fg = "#f38ba8" }
+perm_sep   = { fg = "#3a3a3a" }
+
+progress_label  = { fg = "#e4e4e4", bold = true }
+progress_normal = { fg = "#f9e2af", bg = "#2a2a2a" }
+progress_error  = { fg = "#f38ba8", bg = "#2a2a2a" }
+
+[input]
+border   = { fg = "#f9e2af" }
+selected = { reversed = true }
+
+[confirm]
+border  = { fg = "#f9e2af" }
+title   = { fg = "#f9e2af" }
+btn_yes = { reversed = true }
+
+[pick]
+border = { fg = "#f9e2af" }
+active = { fg = "#f9e2af", bold = true }
+
+[tasks]
+border  = { fg = "#f9e2af" }
+hovered = { fg = "#1a1a1a", bg = "#f9e2af", underline = true }
+
+[which]
+mask            = { bg = "#1a1a1a" }
+cand            = { fg = "#f9e2af" }
+rest            = { fg = "#a8a8a8" }
+desc            = { fg = "#e4e4e4" }
+separator       = "  "
+separator_style = { fg = "#3a3a3a" }
+
+[notify]
+title_info  = { fg = "#89b4fa" }
+title_warn  = { fg = "#f9e2af" }
+title_error = { fg = "#f38ba8" }
+
+[help]
+on      = { fg = "#f9e2af" }
+run     = { fg = "#a6e3a1" }
+desc    = { fg = "#e4e4e4" }
+hovered = { fg = "#1a1a1a", bg = "#f9e2af" }
+footer  = { fg = "#1a1a1a", bg = "#f9e2af" }
+
+# Couleur du TEXTE des items
+[filetype]
+rules = [
+    { url = "*/",                 fg = "#f9e2af", bold = true },
+    { url = "*", is = "exec",     fg = "#a6e3a1" },
+    { url = "*", is = "orphan",   fg = "#f38ba8" },
+    { mime = "image/*",           fg = "#f5c2e7" },
+    { mime = "video/*",           fg = "#fab387" },
+    { mime = "audio/*",           fg = "#94e2d5" },
+    { mime = "application/pdf",   fg = "#f9e2af" },
+    { url = "*",                  fg = "#e4e4e4" },
+]
+
+# Couleur des ICÔNES : on vide le set "dossiers spéciaux" de yazi
+# et on laisse les conditions gérer tout
+[icon]
+dirs  = []
+files = []
+
+prepend_conds = [
+    { if = "dir",    text = "\uf07c", fg = "#f9e2af" },
+    { if = "orphan", text = "\uf127", fg = "#f38ba8" },
+    { if = "link",   text = "\uf0c1", fg = "#94e2d5" },
+    { if = "exec",   text = "\uf013", fg = "#a6e3a1" },
+]

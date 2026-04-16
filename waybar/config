@@ -1,0 +1,96 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 6,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+
+    "modules-left":   ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right":  ["temperature", "cpu", "memory", "pulseaudio", "power-profiles-daemon", "network", "battery", "tray"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">\uf0ad {}</span>",
+        "tooltip": false
+    },
+
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 60,
+        "tooltip": false
+    },
+
+    "clock": {
+        "interval": 10,
+        "format": "\uf073  {:%H:%M    %a %d %b}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "\uf2db  {usage}%",
+        "tooltip": false
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "\uefc5  {used:0.1f}G"
+    },
+
+    "temperature": {
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 85,
+        "interval": 3,
+        "format": "\uf2c9 {temperatureC}\u00b0C",
+        "format-critical": "\uf769 {temperatureC}\u00b0C"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "\uf6a9  muted",
+        "format-icons": { "default": ["\uf026", "\uf027", "\uf028"] },
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}  {profile}",
+        "tooltip-format": "Profile: {profile}\nDriver: {driver}",
+        "format-icons": {
+            "default":     "\uf0e7",
+            "performance": "\uf0e7",
+            "balanced":    "\uf042",
+            "power-saver": "\uf06c"
+        }
+    },
+
+    "network": {
+        "format-wifi":      "\uf1eb  {essid}",
+        "format-ethernet":  "\uf6ff  {ipaddr}",
+        "format-disconnected": "\uf6ac  offline",
+        "tooltip-format-wifi":     "{essid} ({signalStrength}%) \u00b7 {ipaddr}",
+        "tooltip-format-ethernet": "{ifname} \u00b7 {ipaddr}"
+    },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format":          "{icon}  {capacity}%",
+        "format-charging": "\uf0e7  {capacity}%",
+        "format-plugged":  "\uf1e6  {capacity}%",
+        "format-icons":    ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"]
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    }
+}

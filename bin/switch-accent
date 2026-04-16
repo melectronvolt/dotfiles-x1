@@ -1,0 +1,59 @@
+#!/bin/bash
+# Change la couleur d'accent dans toute la config.
+# Usage : switch-accent <hex_sans_diese>
+
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+    cat <<USAGE
+Usage: $(basename "$0") <hex>
+
+Exemples de couleurs (Catppuccin) :
+  f9e2af  yellow     (jaune pastel, courant)
+  b4befe  lavender   (bleu-mauve pastel)
+  74c7ec  sapphire   (bleu cyan)
+  89b4fa  blue       (bleu clair saturé)
+  94e2d5  teal       (cyan vert)
+  f5c2e7  pink       (rose pastel)
+  a6e3a1  green      (vert pastel)
+  fab387  peach      (pêche)
+USAGE
+    exit 1
+fi
+
+hex="${1#\#}"
+if ! [[ "$hex" =~ ^[0-9a-fA-F]{6}$ ]]; then
+    echo "Erreur : '$1' n'est pas un code hex valide." >&2
+    exit 1
+fi
+hex="${hex,,}"
+
+# Sway
+sed -i "s|^set \$accent .*|set \$accent    #${hex}|" ~/.config/sway/config
+
+# Waybar
+sed -i "s|^@define-color accent .*|@define-color accent    #${hex};|" ~/.config/waybar/style.css
+
+# Wofi
+sed -i "s|^@define-color accent .*|@define-color accent    #${hex};|" ~/.config/wofi/style.css
+
+# Mako : 2 occurrences (global + urgency=normal)
+sed -i "0,/^border-color=/{s|^border-color=.*|border-color=#${hex}|}" ~/.config/mako/config
+sed -i "/^\[urgency=normal\]$/{n;s|^border-color=.*|border-color=#${hex}|}" ~/.config/mako/config
+
+# Foot
+sed -i "s|^color=1a1a1a .*|color=1a1a1a ${hex}|" ~/.config/foot/foot.ini
+sed -i "s|^selection-background=.*|selection-background=${hex}|" ~/.config/foot/foot.ini
+
+# Yazi : seules les lignes marquées "# A" sont modifiées
+if [ -f ~/.config/yazi/theme.toml ]; then
+    sed -i "/# A$/s|#[0-9a-fA-F]\{6\}|#${hex}|g" ~/.config/yazi/theme.toml
+fi
+
+# Rechargements
+swaymsg reload >/dev/null 2>&1 && echo "✓ Sway rechargé"
+pkill -SIGUSR2 waybar 2>/dev/null && echo "✓ Waybar rechargée"
+makoctl reload 2>/dev/null && echo "✓ Mako rechargée"
+echo
+echo "Accent appliqué : #${hex}"
+echo "(yazi : recharger avec \`:theme\` ou simplement relancer yazi)"

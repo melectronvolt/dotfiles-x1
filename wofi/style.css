@@ -1,0 +1,62 @@
+/* ~/.config/wofi/style.css */
+
+@define-color base      #1a1a1a;
+@define-color mantle    #0f0f0f;
+@define-color text      #e4e4e4;
+@define-color subtext   #a8a8a8;
+@define-color surface0  #2a2a2a;
+@define-color surface1  #3a3a3a;
+@define-color accent    #f9e2af;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14px;
+}
+
+window {
+    background-color: alpha(@base, 0.96);
+    border: 2px solid @accent;
+    border-radius: 12px;
+}
+
+#outer-box {
+    background: transparent;
+    padding: 10px;
+}
+
+#input {
+    margin: 0 0 10px 0;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: @mantle;
+    color: @text;
+    caret-color: @accent;
+}
+
+#input:focus { outline: none; }
+#inner-box   { background: transparent; }
+#scroll      { margin: 0; }
+
+#text {
+    color: @text;
+    padding: 4px 6px;
+}
+
+#entry {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: transparent;
+}
+
+#entry:selected {
+    background: @accent;
+}
+
+#entry:selected #text {
+    color: @base;
+}
+
+#entry image {
+    margin-right: 10px;
+}
