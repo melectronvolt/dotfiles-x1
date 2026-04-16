@@ -60,6 +60,8 @@ eval "$(fzf --bash)"
 # Override LS_COLORS pour dossiers en jaune (cohérence avec yazi/sway)
 # 33 = jaune ANSI ; 01;33 = jaune gras
 
+
+
 # LS_COLORS : base dircolors + overrides theme noir+jaune
 eval "$(dircolors -b)"
 LS_COLORS="${LS_COLORS}:di=01;33:ln=01;36:ex=01;32:ow=30;43:tw=30;43:st=30;43:su=01;31:sg=01;31:pi=01;35:so=01;35:bd=01;35:cd=01;35"
