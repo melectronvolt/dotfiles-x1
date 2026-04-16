@@ -184,10 +184,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym Print            exec grim - | wl-copy
-bindsym Shift+Print      exec slurp | grim -g - - | wl-copy
-bindsym Ctrl+Print       exec grim ~/Pictures/screenshot-$(date +%F-%H%M%S).png
-bindsym Ctrl+Shift+Print exec slurp | grim -g - ~/Pictures/screenshot-$(date +%F-%H%M%S).png
 
 bindsym --locked XF86AudioRaiseVolume  exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindsym --locked XF86AudioLowerVolume  exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
@@ -210,9 +206,23 @@ for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="foot" title="^float-.*"] floating enable
 for_window [title="Picture-in-Picture"] floating enable, sticky enable
 
-bar {
-    swaybar_command waybar
-}
 
 include /etc/sway/config.d/*
 bindsym --to-code $mod+l exec ~/.local/bin/sway-lock
+
+# ---- Screenshots ----
+
+# ---- Screenshots ----
+bindsym --to-code Print            exec ~/.local/bin/screenshot region
+bindsym --to-code Shift+Print      exec ~/.local/bin/screenshot screen
+bindsym --to-code Ctrl+Print       exec ~/.local/bin/screenshot window
+bindsym --to-code $mod+Print       exec ~/.local/bin/screenshot edit
+
+# Fn+F7 sur clavier Logitech émet Super+Shift+S
+bindsym --to-code $mod+Shift+s     exec ~/.local/bin/screenshot region
+bindsym --to-code $mod+Shift+f     exec ~/.local/bin/screenshot screen
+bindsym --to-code $mod+Shift+w     exec ~/.local/bin/screenshot window
+bindsym --to-code $mod+Shift+a     exec ~/.local/bin/screenshot edit
+
+# Waybar : relance propre à chaque reload Sway
+exec_always sh -c 'pkill waybar; sleep 0.3; waybar'

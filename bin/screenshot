@@ -1,0 +1,55 @@
+#!/bin/bash
+# Unified screenshot tool for Sway/Wayland
+# Usage: screenshot [region|screen|window|edit]
+
+case "$(hostname)" in
+    i7)  SCREENSHOT_DIR="/mnt/Data/Images/Screenshots" ;;
+    x1)  SCREENSHOT_DIR="$HOME/Pictures/Screenshots" ;;
+    *)   SCREENSHOT_DIR="$HOME/Pictures/Screenshots" ;;
+esac
+
+mkdir -p "$SCREENSHOT_DIR"
+
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+FILE="$SCREENSHOT_DIR/Screenshot_$TIMESTAMP.png"
+MODE="${1:-region}"
+
+SLURP_OPTS='-b 1a1a1aAA -c f9e2afff -s 00000000 -B 00000000 -w 2'
+
+case "$MODE" in
+    region)
+        grim -g "$(slurp $SLURP_OPTS)" "$FILE"
+        ;;
+    screen)
+        FOCUSED=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+        grim -o "$FOCUSED" "$FILE"
+        ;;
+    window)
+        GEOM=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | "\(.rect.x),\(.rect.y) \(.rect.width)x\(.rect.height)"' | head -1)
+        grim -g "$GEOM" "$FILE"
+        ;;
+    edit)
+        TMP=$(mktemp --suffix=.png)
+        grim -g "$(slurp $SLURP_OPTS)" "$TMP" 2>/dev/null
+        if [ -s "$TMP" ]; then
+            swappy -f "$TMP" -o "$FILE"
+            rm -f "$TMP"
+        else
+            notify-send "Screenshot" "Capture cancelled" -u low
+            rm -f "$TMP"
+            exit 0
+        fi
+        ;;
+    *)
+        echo "Usage: $0 [region|screen|window|edit]"
+        exit 1
+        ;;
+esac
+
+if [ -s "$FILE" ]; then
+    wl-copy < "$FILE"
+    notify-send "Screenshot" "Saved: $(basename $FILE)" -i "$FILE" -t 3000
+else
+    notify-send "Screenshot" "Capture cancelled" -u low
+    rm -f "$FILE" 2>/dev/null
+fi
