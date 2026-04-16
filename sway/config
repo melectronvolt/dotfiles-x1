@@ -94,6 +94,7 @@ input "type:touchpad" {
 exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Agent polkit (remplace polkit-gnome retiré de Fedora 41+)
+exec swayidle -w -C ~/.config/swayidle/config
 exec lxpolkit
 
 exec mako
@@ -214,3 +215,4 @@ bar {
 }
 
 include /etc/sway/config.d/*
+bindsym --to-code $mod+l exec ~/.local/bin/sway-lock

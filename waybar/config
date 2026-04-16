@@ -9,7 +9,7 @@
 
     "modules-left":   ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right":  ["temperature", "cpu", "memory", "battery", "pulseaudio", "network", "custom/vpn", "bluetooth", "tray"],
+    "modules-right":  ["temperature", "cpu", "memory", "battery", "pulseaudio", "network", "custom/vpn", "bluetooth", "custom/power", "tray"],
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -102,6 +102,12 @@
         "return-type": "json",
         "on-click": "~/.local/bin/vpn-toggle",
         "tooltip": true
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": "Menu power",
+        "on-click": "~/.local/bin/power-menu"
     },
 
     "tray": {

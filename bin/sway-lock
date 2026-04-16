@@ -1,0 +1,28 @@
+#!/bin/bash
+# Swaylock avec thème Catppuccin noir + jaune
+exec swaylock \
+    --daemonize \
+    --color '1a1a1a' \
+    --inside-color '1a1a1a' \
+    --inside-ver-color '1a1a1a' \
+    --inside-wrong-color '1a1a1a' \
+    --inside-clear-color '1a1a1a' \
+    --ring-color 'f9e2af' \
+    --ring-ver-color '89b4fa' \
+    --ring-wrong-color 'f38ba8' \
+    --ring-clear-color 'a6e3a1' \
+    --key-hl-color 'f9e2af' \
+    --bs-hl-color 'f38ba8' \
+    --line-color '00000000' \
+    --line-ver-color '00000000' \
+    --line-wrong-color '00000000' \
+    --line-clear-color '00000000' \
+    --separator-color '00000000' \
+    --text-color 'f9e2af' \
+    --text-ver-color '89b4fa' \
+    --text-wrong-color 'f38ba8' \
+    --text-clear-color 'a6e3a1' \
+    --indicator-radius 90 \
+    --indicator-thickness 8 \
+    --show-failed-attempts \
+    --ignore-empty-password

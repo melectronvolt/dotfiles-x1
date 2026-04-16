@@ -147,3 +147,18 @@ window#waybar {
 #custom-vpn.connected    { color: @green; }
 #custom-vpn.disconnected { color: @red; }
 #custom-vpn.absent       { color: @overlay0; }
+
+/* Power button */
+#custom-power {
+    padding: 0 14px;
+    margin: 5px 2px;
+    background: @mantle;
+    border-radius: 6px;
+    color: @accent;
+    font-size: 15px;
+}
+
+#custom-power:hover {
+    background: @accent;
+    color: @base;
+}
