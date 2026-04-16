@@ -9,7 +9,7 @@
 
     "modules-left":   ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right":  ["temperature", "cpu", "memory", "battery", "pulseaudio", "network", "custom/vpn", "bluetooth", "custom/power", "tray"],
+    "modules-right":  ["temperature", "cpu", "memory", "battery", "power-profiles-daemon", "pulseaudio", "network", "custom/vpn", "bluetooth", "custom/power", "tray"],
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -62,6 +62,17 @@
         "format-plugged":   "\uf1e6  {capacity}%",
         "format-icons":     ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
         "tooltip-format":   "{timeTo}"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Profile: {profile}\nDriver: {driver}",
+        "format-icons": {
+            "default":     "",
+            "performance": "",
+            "balanced":    "",
+            "power-saver": ""
+        }
     },
 
     "pulseaudio": {

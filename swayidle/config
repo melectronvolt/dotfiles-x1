@@ -1,9 +1,0 @@
-# Comportement AC (secteur) :
-# - 5 min (300s) d'inactivite -> ecran eteint
-# - 10 min (600s) -> verrouillage swaylock
-# - Reprise (resume) -> ecran rallume
-# - Sortie de veille systeme -> lock avant suspend
-
-timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
-timeout 600 '~/.local/bin/sway-lock'
-before-sleep '~/.local/bin/sway-lock'

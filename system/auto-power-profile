@@ -1,9 +1,8 @@
 #!/bin/bash
-# Bascule tuned profile selon l'état de l'adaptateur secteur.
+# Bascule tuned profile ET swayidle config selon l'état de l'adaptateur secteur.
 set -euo pipefail
 
-# Lit l'état du premier "Mains" (AC adapter) trouvé dans /sys.
-# Gère les variantes de nommage selon le hardware (AC, ACAD, ADP0, etc.).
+# Detection AC online
 online=0
 for f in /sys/class/power_supply/*/type; do
     if [ "$(cat "$f")" = "Mains" ]; then
@@ -12,15 +11,21 @@ for f in /sys/class/power_supply/*/type; do
     fi
 done
 
-# Profils cibles (en noms tuned, traduits par tuned-ppd vers PPD)
+# ---- Partie 1 : tuned profile ----
 if [ "$online" = "1" ]; then
-    target="throughput-performance"   # -> "performance" côté PPD
+    target="throughput-performance"
 else
-    target="powersave"                # -> "power-saver" côté PPD
+    target="powersave"
 fi
 
 current=$(tuned-adm active 2>/dev/null | awk -F': ' '/active profile/ {print $2}')
 if [ "$current" != "$target" ]; then
     tuned-adm profile "$target"
     logger -t auto-power-profile "AC=$online, switched to $target (was $current)"
+fi
+
+# ---- Partie 2 : swayidle config ----
+# Lancer la bascule en tant qu'user remi dans sa session Sway
+if pgrep -u remi sway >/dev/null; then
+    sudo -u remi /home/remi/.local/bin/swayidle-switch || true
 fi
