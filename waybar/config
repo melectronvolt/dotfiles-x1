@@ -9,7 +9,7 @@
 
     "modules-left":   ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right":  ["temperature", "cpu", "memory", "pulseaudio", "power-profiles-daemon", "network", "battery", "tray"],
+    "modules-right":  ["temperature", "cpu", "memory", "battery", "pulseaudio", "network", "custom/vpn", "bluetooth", "tray"],
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -54,6 +54,16 @@
         "format-critical": "\uf769 {temperatureC}\u00b0C"
     },
 
+    "battery": {
+        "interval": 10,
+        "states": { "warning": 25, "critical": 10 },
+        "format":           "{icon}  {capacity}%",
+        "format-charging":  "\uf0e7  {capacity}%",
+        "format-plugged":   "\uf1e6  {capacity}%",
+        "format-icons":     ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+        "tooltip-format":   "{timeTo}"
+    },
+
     "pulseaudio": {
         "format": "{icon}  {volume}%",
         "format-muted": "\uf6a9  muted",
@@ -62,31 +72,36 @@
         "scroll-step": 5
     },
 
-    "power-profiles-daemon": {
-        "format": "{icon}  {profile}",
-        "tooltip-format": "Profile: {profile}\nDriver: {driver}",
-        "format-icons": {
-            "default":     "\uf0e7",
-            "performance": "\uf0e7",
-            "balanced":    "\uf042",
-            "power-saver": "\uf06c"
-        }
+    "bluetooth": {
+        "format":           "\uf293",
+        "format-connected": "\uf293  {num_connections}",
+        "format-disabled":  "\uf294",
+        "format-off":       "\uf294",
+        "tooltip-format":           "Bluetooth actif",
+        "tooltip-format-connected": "{num_connections} appareil(s)\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-disabled":  "Bluetooth desactive",
+        "tooltip-format-off":       "Bluetooth eteint",
+        "on-click": "blueman-manager"
     },
 
     "network": {
-        "format-wifi":      "\uf1eb  {essid}",
-        "format-ethernet":  "\uf6ff  {ipaddr}",
-        "format-disconnected": "\uf6ac  offline",
-        "tooltip-format-wifi":     "{essid} ({signalStrength}%) \u00b7 {ipaddr}",
-        "tooltip-format-ethernet": "{ifname} \u00b7 {ipaddr}"
+        "format-wifi":         "{icon}  {signalStrength}%",
+        "format-ethernet":     "\udb82\udf90",
+        "format-disconnected": "\uf6ac",
+        "format-icons":        ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
+        "tooltip-format-wifi":         "{essid}\n{ifname}  \u00b7  {ipaddr}",
+        "tooltip-format-ethernet":     "{ifname}\n{ipaddr}",
+        "tooltip-format-disconnected": "Deconnecte",
+        "on-click":            "nm-connection-editor"
     },
 
-    "battery": {
-        "states": { "warning": 30, "critical": 15 },
-        "format":          "{icon}  {capacity}%",
-        "format-charging": "\uf0e7  {capacity}%",
-        "format-plugged":  "\uf1e6  {capacity}%",
-        "format-icons":    ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"]
+    "custom/vpn": {
+        "exec": "~/.local/bin/vpn-status",
+        "interval": 3,
+        "return-type": "json",
+        "on-click": "~/.local/bin/vpn-toggle",
+        "tooltip": true
     },
 
     "tray": {

@@ -97,8 +97,6 @@ exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 exec lxpolkit
 
 exec mako
-exec nm-applet --indicator
-exec blueman-applet
 
 exec_always systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec_always systemctl --user restart xdg-desktop-portal-wlr.service

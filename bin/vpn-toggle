@@ -1,0 +1,14 @@
+#!/bin/bash
+VPN_NAME="Fedora-CH-247"
+
+if ! nmcli -t -f NAME connection show 2>/dev/null | grep -q "^${VPN_NAME}$"; then
+    notify-send "VPN" "Profil $VPN_NAME introuvable" -u critical
+    exit 1
+fi
+
+if nmcli -t -f NAME connection show --active 2>/dev/null | grep -q "^${VPN_NAME}$"; then
+    nmcli connection down "$VPN_NAME" && notify-send "VPN" "Deconnecte de $VPN_NAME"
+else
+    nmcli connection up "$VPN_NAME" && notify-send "VPN" "Connecte a $VPN_NAME" || \
+        notify-send "VPN" "Echec de connexion a $VPN_NAME" -u critical
+fi

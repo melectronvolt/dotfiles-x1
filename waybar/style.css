@@ -121,3 +121,29 @@ window#waybar {
     background: @red;
     border-radius: 6px;
 }
+
+/* Bluetooth en bleu */
+#bluetooth {
+    padding: 0 12px;
+    margin: 5px 2px;
+    background: @mantle;
+    border-radius: 6px;
+    color: #89b4fa;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: @overlay0;
+}
+
+/* VPN custom */
+#custom-vpn {
+    padding: 0 12px;
+    margin: 5px 2px;
+    background: @mantle;
+    border-radius: 6px;
+}
+
+#custom-vpn.connected    { color: @green; }
+#custom-vpn.disconnected { color: @red; }
+#custom-vpn.absent       { color: @overlay0; }
