@@ -91,11 +91,9 @@ input "type:touchpad" {
 # AUTOSTART
 ###############################################################################
 
-exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway GTK_THEME=Adwaita:dark
 
 # Agent polkit (remplace polkit-gnome retiré de Fedora 41+)
-exec_always gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-exec_always gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 exec ~/.local/bin/swayidle-switch
 exec lxpolkit
 
@@ -223,3 +221,6 @@ exec_always sh -c 'pkill waybar; sleep 0.3; waybar'
 # Logout
 bindsym $mod+Shift+l exec swaynag -t warning -m "Logout?" -B "Yes" "swaymsg exit"
 bindsym --to-code $mod+space exec pkill wofi || wofi --show drun
+
+# Dark theme GTK
+exec_always sh -c 'gsettings set org.gnome.desktop.interface color-scheme prefer-dark; gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark'
