@@ -224,3 +224,7 @@ bindsym --to-code $mod+space exec pkill wofi || wofi --show drun
 
 # Dark theme GTK
 exec_always sh -c 'gsettings set org.gnome.desktop.interface color-scheme prefer-dark; gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark'
+
+# ---- Obsidian au démarrage dans le scratchpad ----
+exec env LC_ALL=fr_FR.UTF-8 /home/remi/.local/opt/obsidian/obsidian
+for_window [app_id="obsidian"] move scratchpad, resize set width 90ppt height 85ppt
