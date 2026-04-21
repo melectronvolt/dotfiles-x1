@@ -1,6 +1,33 @@
 #!/bin/bash
 set -euo pipefail
 
+# Au démarrage de Sway, attendre que WAYLAND_DISPLAY soit prêt
+for i in $(seq 1 30); do
+    if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+        break
+    fi
+    # Chercher le socket
+    WAYLAND_DISPLAY=$(basename $(ls -t /run/user/$(id -u)/wayland-* 2>/dev/null | grep -v '\.lock$' | head -1) 2>/dev/null) || true
+    export WAYLAND_DISPLAY
+    if [ -n "$WAYLAND_DISPLAY" ]; then
+        break
+    fi
+    sleep 0.5
+done
+
+if [ -z "${SWAYSOCK:-}" ]; then
+    SWAYSOCK=$(ls -t /run/user/$(id -u)/sway-ipc.*.sock 2>/dev/null | head -1)
+    export SWAYSOCK
+fi
+
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+if [ -z "${WAYLAND_DISPLAY:-}" ] || [ -z "${SWAYSOCK:-}" ]; then
+    logger -t swayidle-switch "Error: no Sway session found after 15s"
+    exit 1
+fi
+
+# Detection AC
 online=0
 for f in /sys/class/power_supply/*/type; do
     if [ "$(cat "$f")" = "Mains" ]; then
@@ -18,23 +45,7 @@ else
 fi
 
 pkill -x swayidle 2>/dev/null || true
-sleep 0.2
-
-if [ -z "${WAYLAND_DISPLAY:-}" ]; then
-    WAYLAND_DISPLAY=$(basename $(ls -t /run/user/$(id -u)/wayland-* 2>/dev/null | grep -v '\.lock$' | head -1) 2>/dev/null)
-    export WAYLAND_DISPLAY
-    export XDG_RUNTIME_DIR=/run/user/$(id -u)
-fi
-
-if [ -z "${SWAYSOCK:-}" ]; then
-    SWAYSOCK=$(ls -t /run/user/$(id -u)/sway-ipc.*.sock 2>/dev/null | head -1)
-    export SWAYSOCK
-fi
-
-if [ -z "$WAYLAND_DISPLAY" ] || [ -z "$SWAYSOCK" ]; then
-    logger -t swayidle-switch "Error: no Sway session found"
-    exit 1
-fi
+sleep 0.3
 
 swayidle -w -C "$config" &
 disown
