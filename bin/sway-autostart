@@ -1,0 +1,24 @@
+#!/bin/bash
+sleep 2
+
+# Apps avec assign
+env LC_ALL=fr_FR.UTF-8 ~/.local/bin/obsidian &
+flatpak run com.todoist.Todoist &
+proton-mail &
+
+# Workspace 2 : 1 Firefox
+swaymsg 'workspace 2'
+sleep 0.5
+firefox &
+sleep 2
+
+# Workspace 3 : 2 foot horizontaux
+swaymsg 'workspace 3; splith'
+sleep 0.5
+foot &
+sleep 1
+foot &
+sleep 1
+
+# Retour au workspace 1
+swaymsg 'workspace 1'
