@@ -228,7 +228,8 @@ exec_always sh -c 'gsettings set org.gnome.desktop.interface color-scheme prefer
 
 # ---- Assign apps aux workspaces ----
 assign [app_id="obsidian"] workspace 5
-assign [class="Proton Mail"] workspace 8
+assign [app_id="Proton Mail"] workspace 8
+for_window [app_id="Proton Mail"] move container to workspace number 8
 assign [app_id="Todoist"] workspace 9
 
 # ---- Autostart apps ----
