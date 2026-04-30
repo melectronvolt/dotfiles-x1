@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -u
+
+# Placement PiP adaptatif pour laptop x1.
+# Coordonnées relatives au workspace visible, pas coordonnées globales écran.
 
 margin=18
 title_re="Picture-in-Picture|Picture in picture|Picture-in-picture|Image dans l.?image"
+log="${XDG_RUNTIME_DIR:-/tmp}/pip-place.log"
 
-pip_id="$(
-    swaymsg -t get_tree | jq -r --arg re "$title_re" 
+{
+    echo
+    echo "=== $(date) ==="
+
+    # Laisser le temps à Sway de finir de mapper/flotter la fenêtre.
+    sleep 0.25
+
+    pip_id="$(
+        swaymsg -t get_tree | jq -r --arg re "$title_re" 

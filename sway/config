@@ -236,9 +236,9 @@ assign [app_id="Todoist"] workspace 9
 exec ~/.local/bin/sway-autostart
 
 
+
 # BEGIN PIP RULES
 # Brave / Chromium / Firefox Picture-in-Picture
-# Fenêtre flottante, sticky, replacée automatiquement en bas à droite de l’écran actif.
 for_window [title="^(Picture-in-Picture|Picture in picture|Image dans l.?image|Picture-in-picture)$"] floating enable, sticky enable, border pixel 1, exec ~/.local/bin/pip-place
 
 # Ne pas voler le focus quand le PiP apparaît.
