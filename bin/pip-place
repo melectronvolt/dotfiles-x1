@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+margin=18
+title_re="Picture-in-Picture|Picture in picture|Picture-in-picture|Image dans l.?image"
+
+pip_id="$(
+    swaymsg -t get_tree | jq -r --arg re "$title_re" 
