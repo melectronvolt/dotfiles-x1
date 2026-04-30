@@ -9,7 +9,7 @@ proton-mail &
 # Workspace 2 : 1 Firefox
 swaymsg 'workspace 2'
 sleep 0.5
-firefox &
+/usr/bin/brave-origin-nightly --new-window &
 sleep 2
 
 # Workspace 3 : 2 foot horizontaux
