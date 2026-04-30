@@ -235,6 +235,7 @@ assign [app_id="Todoist"] workspace 9
 # ---- Autostart apps ----
 exec ~/.local/bin/sway-autostart
 
+
 # BEGIN PIP RULES
 # Brave / Chromium / Firefox Picture-in-Picture
 # Fenêtre flottante, sticky, replacée automatiquement en bas à droite de l’écran actif.
