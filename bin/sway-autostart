@@ -2,7 +2,7 @@
 sleep 2
 
 # Apps avec assign
-env LC_ALL=fr_FR.UTF-8 ~/.local/bin/obsidian &
+env LC_ALL=fr_FR.UTF-8 /home/remi/.local/opt/obsidian/obsidian &
 flatpak run com.todoist.Todoist &
 proton-mail &
 
