@@ -12,10 +12,11 @@
 @define-color accent    #f9e2af;
 @define-color red       #f38ba8;
 @define-color green     #a6e3a1;
+@define-color blue      #89b4fa;
 /* === END PALETTE === */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Font Awesome 6 Free", "FontAwesome", "Noto Sans Symbols2", "Noto Sans", sans-serif;
     font-size: 15px;
     font-weight: 500;
     min-height: 0;

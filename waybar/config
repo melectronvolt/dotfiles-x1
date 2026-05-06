@@ -6,107 +6,132 @@
     "margin-top": 6,
     "margin-left": 10,
     "margin-right": 10,
-
-    "modules-left":   ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["clock"],
-    "modules-right":  ["temperature", "cpu", "memory", "battery", "power-profiles-daemon", "pulseaudio", "network", "custom/vpn", "bluetooth", "custom/power", "tray"],
-
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "temperature",
+        "cpu",
+        "memory",
+        "battery",
+        "power-profiles-daemon",
+        "pulseaudio",
+        "network",
+        "custom/vpn",
+        "bluetooth",
+        "custom/power",
+        "tray"
+    ],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{name}"
     },
-
     "sway/mode": {
-        "format": "<span style=\"italic\">\uf0ad {}</span>",
+        "format": "<span style=\"italic\"> {}</span>",
         "tooltip": false
     },
-
     "sway/window": {
         "format": "{title}",
         "max-length": 60,
         "tooltip": false
     },
-
     "clock": {
         "interval": 10,
-        "format": "\uf073  {:%H:%M    %a %d %b}",
+        "format": "  {:%H:%M    %a %d %b}",
         "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
-
     "cpu": {
         "interval": 2,
-        "format": "\uf2db  {usage}%",
+        "format": "  {usage}%",
         "tooltip": false
     },
-
     "memory": {
         "interval": 5,
-        "format": "\uefc5  {used:0.1f}G"
+        "format": "  {used:0.1f}G"
     },
-
     "temperature": {
         "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
         "input-filename": "temp1_input",
         "critical-threshold": 85,
         "interval": 3,
-        "format": "\uf2c9 {temperatureC}\u00b0C",
-        "format-critical": "\uf769 {temperatureC}\u00b0C"
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C"
     },
-
     "battery": {
         "interval": 10,
-        "states": { "warning": 25, "critical": 10 },
-        "format":           "{icon}  {capacity}%",
-        "format-charging":  "\uf0e7  {capacity}%",
-        "format-plugged":   "\uf1e6  {capacity}%",
-        "format-icons":     ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
-        "tooltip-format":   "{timeTo}"
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format": "{timeTo}"
     },
-
     "power-profiles-daemon": {
         "format": "{icon}",
         "tooltip-format": "Profile: {profile}\nDriver: {driver}",
         "format-icons": {
-            "default":     "",
-            "performance": "",
-            "balanced":    "",
+            "default": "",
+            "performance": "",
+            "balanced": "",
             "power-saver": ""
         }
     },
-
     "pulseaudio": {
         "format": "{icon}  {volume}%",
-        "format-muted": "\uf6a9  muted",
-        "format-icons": { "default": ["\uf026", "\uf027", "\uf028"] },
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
         "on-click": "pavucontrol",
         "scroll-step": 5
     },
-
     "bluetooth": {
-        "format":           "\uf293",
-        "format-connected": "\uf293  {num_connections}",
-        "format-disabled":  "\uf294",
-        "format-off":       "\uf294",
-        "tooltip-format":           "Bluetooth on",
+        "format": "",
+        "format-connected": "  {num_connections}",
+        "format-disabled": "",
+        "format-off": "",
+        "tooltip-format": "Bluetooth on",
         "tooltip-format-connected": "{num_connections} device(s)\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "tooltip-format-disabled":  "Bluetooth disabled",
-        "tooltip-format-off":       "Bluetooth off",
+        "tooltip-format-disabled": "Bluetooth disabled",
+        "tooltip-format-off": "Bluetooth off",
         "on-click": "blueman-manager"
     },
-
     "network": {
-        "format-wifi":         "{icon}  {signalStrength}%",
-        "format-ethernet":     "\udb82\udf90",
-        "format-disconnected": "\uf6ac",
-        "format-icons":        ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
-        "tooltip-format-wifi":         "{essid}\n{ifname}  \u00b7  {ipaddr}",
-        "tooltip-format-ethernet":     "{ifname}\n{ipaddr}",
+        "format-wifi": "{icon}  {signalStrength}%",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format-wifi": "{essid}\n{ifname}  ·  {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click":            "nm-connection-editor"
+        "on-click": "nm-connection-editor"
     },
-
     "custom/vpn": {
         "exec": "/home/remi/.local/bin/vpn-status",
         "interval": 3,
@@ -114,13 +139,11 @@
         "on-click": "/home/remi/.local/bin/vpn-toggle",
         "tooltip": true
     },
-
     "custom/power": {
-        "format": "\u23fb",
+        "format": "⏻",
         "tooltip": "Power menu",
         "on-click": "/home/remi/.local/bin/power-menu"
     },
-
     "tray": {
         "icon-size": 16,
         "spacing": 8
