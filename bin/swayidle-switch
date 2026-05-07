@@ -1,6 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
+LOCK="/run/user/$(id -u)/swayidle-switch.lock"
+exec 9>"$LOCK"
+if ! flock -n 9; then
+    logger -t swayidle-switch "Another instance is already running, exiting"
+    exit 0
+fi
+
+
 # Au démarrage de Sway, attendre que WAYLAND_DISPLAY soit prêt
 for i in $(seq 1 30); do
     if [ -n "${WAYLAND_DISPLAY:-}" ]; then
